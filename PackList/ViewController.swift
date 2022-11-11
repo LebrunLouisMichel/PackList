@@ -22,25 +22,21 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startEditing(_ sender: Any) {
-        //myTableView.allowsMultipleSelection = true
         myTableView.allowsMultipleSelectionDuringEditing = true
         myTableView.isEditing = !myTableView.isEditing
     }
    
     @IBAction func deleteRows(_ sender: Any) {
         if let selectedRows = myTableView.indexPathsForSelectedRows {
-            // 1
             var items = [String]()
             for indexPath in selectedRows  {
                 items.append(willIchHin[indexPath.row])
             }
-            // 2
             for item in items {
                 if let index = willIchHin.firstIndex(of: item) {
                     willIchHin.remove(at: index)
                 }
             }
-            // 3
             myTableView.beginUpdates()
             myTableView.deleteRows(at: selectedRows, with: .automatic)
             myTableView.endUpdates()
